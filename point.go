@@ -7,8 +7,8 @@ import (
 )
 
 type Point struct {
-	Lat float64 `json:"lat"`
-	Lng float64 `json:"lng"`
+	Lat float64 `json:"lat" form:"lat"`
+	Lng float64 `json:"lng" form:"lng"`
 }
 
 const (
