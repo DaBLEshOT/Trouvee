@@ -1,5 +1,7 @@
 FROM golang:alpine
 
+RUN apk add build-base
+
 WORKDIR /app
 
 COPY go.mod ./
