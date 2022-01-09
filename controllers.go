@@ -1,6 +1,7 @@
 package main
 
 import (
+	"math"
 	"net/http"
 	"strings"
 
@@ -57,18 +58,24 @@ func closestTreasure(c *gin.Context) {
 	}
 
 	DB.Where("found = FALSE").Find(&treasures)
-	var closestDistance float64
-	var closestTreasure Treasure
+
+	closest := struct {
+		distance float64
+		treasure Treasure
+	}{
+		distance: math.MaxFloat64,
+	}
 	for _, t := range treasures {
 		p := NewPoint(t.Lat, t.Lng)
-		if distance := point.GreatCircleDistance(p); distance < closestDistance {
-			closestDistance = distance
+		if distance := point.GreatCircleDistance(p); distance < closest.distance {
+			closest.distance = distance
+			closest.treasure = t
 		}
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"distance": closestDistance,
-		"hint":     closestTreasure.Hint,
+		"distance": closest.distance,
+		"hint":     closest.treasure.Hint,
 	})
 }
 
