@@ -10,6 +10,7 @@ import (
 
 const (
 	maxDistance = 6
+	maxClosest  = 10
 )
 
 func confirmCoords(c *gin.Context) {
@@ -68,7 +69,11 @@ func closestTreasure(c *gin.Context) {
 	for _, t := range treasures {
 		p := NewPoint(t.Lat, t.Lng)
 		if distance := point.GreatCircleDistance(p); distance < closest.distance {
-			closest.distance = distance
+			if distance < maxClosest {
+				closest.distance = maxClosest
+			} else {
+				closest.distance = distance
+			}
 			closest.treasure = t
 		}
 	}
