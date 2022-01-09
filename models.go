@@ -14,6 +14,7 @@ type Treasure struct {
 	Found       bool    `json:"found,default=false" form:"found,default=false"`
 	Name        string  `json:"name,default=nil" form:"name,default=nil"`
 	Description string  `json:"description,default=nil" form:"description,default=nil"`
+	Hint        string  `json:"hint,default=nil" form:"hint,default=nil"`
 }
 
 func createDatabase() {
@@ -24,6 +25,7 @@ func createDatabase() {
 		Lng:         15.63886,
 		Name:        "Test 1",
 		Description: "",
+		Hint:        "",
 	})
 }
 

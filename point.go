@@ -2,8 +2,6 @@ package main
 
 import (
 	"math"
-
-	_ "github.com/gin-gonic/gin"
 )
 
 type Point struct {
