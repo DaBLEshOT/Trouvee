@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -15,8 +14,8 @@ func confirmCoords(c *gin.Context) {
 	var point Point
 	var treasures []Treasure
 
-	if err := c.Bind(&point); err != nil {
-		log.Fatalln(err)
+	if err := c.ShouldBind(&point); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err})
 		return
 	}
 
@@ -37,8 +36,8 @@ func confirmCoords(c *gin.Context) {
 func createTreasure(c *gin.Context) {
 	var treasure Treasure
 
-	if err := c.Bind(&treasure); err != nil {
-		log.Fatalln(err)
+	if err := c.ShouldBind(&treasure); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err})
 		return
 	}
 
