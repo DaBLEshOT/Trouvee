@@ -5,10 +5,12 @@ import (
 )
 
 func main() {
-	createDatabase()
-
 	r := gin.Default()
+
+	connectDatabase()
+
 	r.POST("/found", confirmCoords)
 	r.POST("/add", createTreasure)
+
 	r.Run()
 }

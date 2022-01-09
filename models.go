@@ -5,6 +5,8 @@ import (
 	"gorm.io/gorm"
 )
 
+var DB *gorm.DB
+
 type Treasure struct {
 	gorm.Model
 	Lat         float64 `json:"lat" form:"lat"`
@@ -15,10 +17,9 @@ type Treasure struct {
 }
 
 func createDatabase() {
-	db := openDb()
-	db.AutoMigrate(&Treasure{})
+	DB.AutoMigrate(&Treasure{})
 
-	db.Create(&Treasure{
+	DB.Create(&Treasure{
 		Lat:         46.561916,
 		Lng:         15.63886,
 		Name:        "Test 1",
@@ -26,11 +27,12 @@ func createDatabase() {
 	})
 }
 
-func openDb() *gorm.DB {
-	db, err := gorm.Open(sqlite.Open("database.db"), &gorm.Config{})
+func connectDatabase() {
+	database, err := gorm.Open(sqlite.Open("database.db"), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
 	}
+	DB = database
 
-	return db
+	createDatabase()
 }
