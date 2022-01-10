@@ -14,4 +14,6 @@ RUN go build -o /trouvee
 
 EXPOSE 8080
 
+ENV GIN_MODE=release
+
 CMD [ "/trouvee" ]
