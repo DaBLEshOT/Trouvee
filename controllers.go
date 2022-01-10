@@ -22,7 +22,7 @@ func confirmCoords(c *gin.Context) {
 		return
 	}
 
-	DB.Where("found = FALSE").Find(&treasures)
+	DB.Find(&treasures)
 	var treasure Treasure
 	for _, t := range treasures {
 		p := NewPoint(t.Lat, t.Lng)
