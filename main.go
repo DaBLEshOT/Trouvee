@@ -14,7 +14,7 @@ func main() {
 
 	r.PUT("/found", tokenAuth(token), confirmCoords)
 	r.POST("/add", tokenAuth(token), createTreasure)
-	r.GET("/closest", tokenAuth(token), closestTreasure)
+	r.POST("/closest", tokenAuth(token), closestTreasure)
 
 	r.Run()
 }
