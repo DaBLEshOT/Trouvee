@@ -1,6 +1,6 @@
 FROM golang:alpine
 
-RUN apk add build-base
+RUN apk add libc-dev gcc
 
 WORKDIR /app
 
