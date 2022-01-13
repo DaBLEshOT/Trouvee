@@ -1,4 +1,4 @@
-FROM golang:alpine
+FROM golang:alpine as build
 
 RUN apk add libc-dev gcc
 
@@ -12,8 +12,10 @@ COPY *.go ./
 
 RUN go build -o /trouvee
 
-EXPOSE 8080
+FROM alpine
+COPY --from=build /trouvee /trouvee
 
+EXPOSE 8080
 ENV GIN_MODE=release
 
 CMD [ "/trouvee" ]
